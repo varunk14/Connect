@@ -1,34 +1,45 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
 import ChatInterface from '@/components/ChatInterface'
-import UsernameModal from '@/components/UsernameModal'
+import GoogleSignIn from '@/components/GoogleSignIn'
 
 export default function Home() {
-  const [username, setUsername] = useState<string | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(true)
+  const { user, loading } = useAuth()
 
-  useEffect(() => {
-    const savedUsername = localStorage.getItem('chatUsername')
-    if (savedUsername) {
-      setUsername(savedUsername)
-      setIsModalOpen(false)
-    }
-  }, [])
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+        <div className="text-center animate-fade-in">
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-white/30 border-t-white mb-6"></div>
+          <p className="text-white text-xl font-semibold">Loading...</p>
+        </div>
+      </main>
+    )
+  }
 
-  const handleUsernameSubmit = (name: string) => {
-    setUsername(name)
-    localStorage.setItem('chatUsername', name)
-    setIsModalOpen(false)
+  if (!user) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
+        <div className="glass rounded-3xl shadow-2xl p-10 max-w-md w-full mx-4 animate-fade-in backdrop-blur-xl border border-white/20">
+          <div className="text-center mb-8">
+            <div className="text-7xl mb-4 animate-bounce">💬</div>
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent mb-3">
+              Welcome to Chat!
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Sign in with Google to start chatting with friends
+            </p>
+          </div>
+          <GoogleSignIn />
+        </div>
+      </main>
+    )
   }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {isModalOpen ? (
-        <UsernameModal onSubmit={handleUsernameSubmit} />
-      ) : (
-        <ChatInterface username={username!} />
-      )}
+      <ChatInterface user={user} />
     </main>
   )
 }

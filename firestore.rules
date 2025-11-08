@@ -1,17 +1,17 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Messages collection - anyone can read/write (for public chat)
+    // Messages collection - only authenticated users can read/write
     match /messages/{messageId} {
-      allow read: if true;
-      allow create: if true; // Allow anyone to create messages for demo
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
       allow update, delete: if false; // Prevent updates and deletes
     }
     
-    // Active users collection - anyone can read/write their own presence
+    // Active users collection - authenticated users can read all, write any (using username as ID)
     match /activeUsers/{userId} {
-      allow read: if true;
-      allow write: if true; // Allow anyone to update presence for demo
+      allow read: if request.auth != null;
+      allow write: if request.auth != null; // Allow any authenticated user to update presence
     }
   }
 }
