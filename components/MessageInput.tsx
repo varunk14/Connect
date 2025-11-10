@@ -26,8 +26,8 @@ export default function MessageInput({ onSendMessage, disabled }: MessageInputPr
   }
 
   return (
-    <div className="glass border-t border-gray-200/50 p-6 backdrop-blur-xl">
-      <form onSubmit={handleSubmit} className="flex gap-3 items-end">
+    <div className="glass border-t border-gray-200/50 p-3 md:p-6 backdrop-blur-xl">
+      <form onSubmit={handleSubmit} className="flex gap-2 md:gap-3 items-end">
         <div className="flex-1 relative">
           <textarea
             value={message}
@@ -36,22 +36,22 @@ export default function MessageInput({ onSendMessage, disabled }: MessageInputPr
             placeholder={disabled ? 'Connecting...' : 'Type your message...'}
             disabled={disabled}
             rows={1}
-            className="w-full px-5 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md text-gray-800 placeholder-gray-400"
-            style={{ minHeight: '56px', maxHeight: '120px' }}
+            className="w-full px-3 md:px-5 py-2.5 md:py-4 bg-white/90 border-2 border-gray-200 rounded-xl md:rounded-2xl focus:outline-none focus:border-indigo-400 focus:ring-2 md:focus:ring-4 focus:ring-indigo-100 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md text-sm md:text-base text-gray-800 placeholder-gray-400"
+            style={{ minHeight: '44px', maxHeight: '120px' }}
           />
         </div>
         <button
           type="submit"
           disabled={disabled || !message.trim()}
-          className="px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-2xl font-semibold hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center gap-2 min-w-[100px] justify-center"
+          className="px-4 md:px-8 py-2.5 md:py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-xl md:rounded-2xl font-semibold hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center gap-1.5 md:gap-2 min-w-[70px] md:min-w-[100px] justify-center text-sm md:text-base"
         >
           {disabled ? (
-            'Wait...'
+            <span className="hidden sm:inline">Wait...</span>
           ) : (
             <>
-              <span>Send</span>
+              <span className="hidden sm:inline">Send</span>
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 md:w-5 md:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

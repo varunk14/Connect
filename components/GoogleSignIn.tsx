@@ -26,12 +26,12 @@ export default function GoogleSignIn() {
       <button
         onClick={handleSignIn}
         disabled={loading}
-        className="flex items-center gap-4 px-8 py-4 bg-white border-2 border-gray-200 rounded-2xl font-semibold hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:border-indigo-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl"
+        className="flex items-center gap-2 md:gap-4 px-6 md:px-8 py-3 md:py-4 bg-white border-2 border-gray-200 rounded-xl md:rounded-2xl font-semibold hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 hover:border-indigo-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl w-full md:w-auto text-sm md:text-base"
       >
         {loading ? (
           <>
             <svg
-              className="animate-spin h-5 w-5 text-gray-600"
+              className="animate-spin h-4 w-4 md:h-5 md:w-5 text-gray-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -55,7 +55,7 @@ export default function GoogleSignIn() {
         ) : (
           <>
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -81,7 +81,7 @@ export default function GoogleSignIn() {
         )}
       </button>
       {error && (
-        <p className="mt-3 text-red-500 text-sm text-center">{error}</p>
+        <p className="mt-3 text-red-500 text-xs md:text-sm text-center px-4">{error}</p>
       )}
     </div>
   )
